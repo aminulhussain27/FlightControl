@@ -10,9 +10,9 @@ public class NewBehaviourScript : MonoBehaviour {
 		Debug.LogError (("Start"));
 	}
 
-	float xAxis = 0;
-	float yAxis = 0;
-	float zAxis = 0;
+	float rotPitch;
+	float rotYaw;
+
 	// Update is called once per frame
 	void Update () {
 
@@ -31,19 +31,27 @@ public class NewBehaviourScript : MonoBehaviour {
 
 		transform.Rotate (Input.GetAxis ("Vertical"), 0.0f, -Input.GetAxis ("Horizontal"));
 
+		rotPitch = transform.eulerAngles.x;
+		rotYaw = transform.eulerAngles.y;
 
 
+		if (rotPitch > 30 && rotPitch < 180) 
+		{
+			rotPitch = 30;
+		}
+		else if (rotPitch < 330 && rotPitch > 180) 
+		{
+			rotPitch = 330;
+		}
 
-
-//		float hortemp = Input.GetAxis("Horizontal");
-//		transform.Rotate(0, 0, -hortemp);
-
-//		Vector3 currentRotation = transform.rotation.eulerAngles;
-//		Debug.LogError (currentRotation);
-//
-//		currentRotation.x = Mathf.Clamp(currentRotation.x, 330f, 390f);
-//		currentRotation.z = Mathf.Clamp(currentRotation.z, 330f, 390f);
-//
-//		transform.rotation = Quaternion.Euler(currentRotation);
+		if (rotYaw > 30 && rotYaw < 180) 
+		{
+			rotYaw = 30;
+		}
+		else if (rotYaw < 330 && rotYaw > 180) 
+		{
+			rotYaw = 330;
+		}
+		transform.rotation = Quaternion.Euler (rotPitch, 0, rotYaw);
 	}
 }
